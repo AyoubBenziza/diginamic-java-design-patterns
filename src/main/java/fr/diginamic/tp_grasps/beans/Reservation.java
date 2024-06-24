@@ -23,11 +23,11 @@ public class Reservation {
 	@JoinColumn(name="ID_CLIENT")
 	private Client client;
 	
-	public Reservation() {
+	protected Reservation() {
 		
 	}
 
-	public Reservation(LocalDateTime date) {
+	protected Reservation(LocalDateTime date) {
 		super();
 		this.date = date;
 	}

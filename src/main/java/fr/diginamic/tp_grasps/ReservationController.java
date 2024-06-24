@@ -1,8 +1,14 @@
 package fr.diginamic.tp_grasps;
 
+import fr.diginamic.tp_grasps.beans.Client;
 import fr.diginamic.tp_grasps.beans.Reservation;
-import fr.diginamic.tp_grasps.factories.ReservationFactory;
+import fr.diginamic.tp_grasps.beans.ReservationFactory;
+import fr.diginamic.tp_grasps.beans.TypeReservation;
+import fr.diginamic.tp_grasps.daos.ClientDao;
+import fr.diginamic.tp_grasps.daos.TypeReservationDao;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /** Controlleur qui prend en charge la gestion des réservations client
  * @author RichardBONNAMY
@@ -10,11 +16,26 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 public class ReservationController {
 
+	private final ClientDao clientDao = new ClientDao();
+
+	private final TypeReservationDao typeReservationDao = new TypeReservationDao();
+
 	public Reservation creerReservation(@RequestBody Params params) {
 		// 1) Récupération des infos provenant de la classe appelante
-		String identifiantClient = params.getIdentifiantClient();
 		String dateReservationStr = params.getDateReservation();
-		String typeReservation = params.getTypeReservation();
-		return ReservationFactory.createReservation(identifiantClient, dateReservationStr, typeReservation, params.getNbPlaces());
-	}
+
+		// 3) Extraction de la base de données des informations client
+		Client client = clientDao.extraireClient(params.getIdentifiantClient());
+
+		// 4) Extraction de la base de données des infos concernant le type de la réservation
+		TypeReservation type = typeReservationDao.extraireTypeReservation(params.getTypeReservation());
+
+		Reservation reservation = ReservationFactory.getInstance(client, dateReservationStr, type, params.getNbPlaces());
+
+		// 6) Ajout de la réservation au client
+		List<Reservation> reservations = client.getReservations();
+		reservations.add(reservation);
+
+        return reservation;
+    }
 }
