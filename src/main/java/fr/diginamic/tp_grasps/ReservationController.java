@@ -10,17 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 public class ReservationController {
 
-	private ReservationFactory factory;
-
-	public void setReservationFactory(ReservationFactory factory) {
-		this.factory = factory;
-	}
-
-	public Reservation createReservation(@RequestBody Params params) {
+	public Reservation creerReservation(@RequestBody Params params) {
 		// 1) Récupération des infos provenant de la classe appelante
 		String identifiantClient = params.getIdentifiantClient();
 		String dateReservationStr = params.getDateReservation();
 		String typeReservation = params.getTypeReservation();
-		return factory.createReservation(identifiantClient, dateReservationStr, typeReservation, params.getNbPlaces());
+		return ReservationFactory.createReservation(identifiantClient, dateReservationStr, typeReservation, params.getNbPlaces());
 	}
 }

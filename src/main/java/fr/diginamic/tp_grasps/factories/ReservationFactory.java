@@ -13,9 +13,9 @@ import static fr.diginamic.tp_grasps.utils.DateUtils.toDate;
 
 public class ReservationFactory {
 
-    private final ClientDao clientDao = new ClientDao();
+    private static final ClientDao clientDao = new ClientDao();
 
-    private final TypeReservationDao typeReservationDao = new TypeReservationDao();
+    private static final TypeReservationDao typeReservationDao = new TypeReservationDao();
 
     public ReservationFactory() {
     }
@@ -27,7 +27,7 @@ public class ReservationFactory {
      * @param nbPlaces nombre de places
      * @return Reservation
      */
-    public Reservation createReservation(String identifiantClient, String dateReservationStr, String typeReservation, int nbPlaces) {
+    public static Reservation createReservation(String identifiantClient, String dateReservationStr, String typeReservation, int nbPlaces) {
         // 2) Conversion de la date de réservation en LocalDateTime
         LocalDateTime dateReservation = toDate(dateReservationStr);
 
