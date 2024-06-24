@@ -2,22 +2,12 @@ package fr.diginamic.tp_grasps.beans;
 
 public class ClientPremium extends Client {
 
-        private double tauxReduction;
-
-        public ClientPremium(String identifiant, double tauxReduction) {
-            super(identifiant, true);
-            this.tauxReduction = tauxReduction;
+        public ClientPremium(String identifiant) {
+            super(identifiant);
         }
 
-        public double getTauxReduction() {
-            return tauxReduction;
-        }
-
-        public void setTauxReduction(double tauxReduction) {
-            this.tauxReduction = tauxReduction;
-        }
-
-        public double calculerReduction(double montant) {
+        @Override
+        public double calculerReduction(double montant, double tauxReduction) {
             return montant * tauxReduction;
         }
 }

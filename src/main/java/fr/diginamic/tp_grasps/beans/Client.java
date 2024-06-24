@@ -13,8 +13,6 @@ public class Client {
 	@Id
 	private String identifiantClient;
 	
-	private boolean premium;
-	
 	@OneToMany(mappedBy = "client")
 	private List<Reservation> reservations = new ArrayList<>();
 	
@@ -22,10 +20,9 @@ public class Client {
 		
 	}
 
-	public Client(String identifiantClient, boolean premium) {
+	public Client(String identifiantClient) {
 		super();
 		this.identifiantClient = identifiantClient;
-		this.premium = premium;
 	}
 
 	/** Getter
@@ -43,20 +40,6 @@ public class Client {
 	}
 
 	/** Getter
-	 * @return the premium
-	 */
-	public boolean isPremium() {
-		return premium;
-	}
-
-	/** Setter
-	 * @param premium the premium to set
-	 */
-	public void setPremium(boolean premium) {
-		this.premium = premium;
-	}
-
-	/** Getter
 	 * @return the reservations
 	 */
 	public List<Reservation> getReservations() {
@@ -70,7 +53,7 @@ public class Client {
 		this.reservations = reservations;
 	}
 
-//	public calculerReduction(double montant) {
-//		return montant;
-//	}
+	public double calculerReduction(double montant, double reductionPourcent) {
+		return montant;
+	}
 }

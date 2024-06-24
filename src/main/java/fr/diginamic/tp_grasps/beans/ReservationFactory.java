@@ -1,17 +1,10 @@
 package fr.diginamic.tp_grasps.beans;
 
-import fr.diginamic.tp_grasps.daos.ClientDao;
-import fr.diginamic.tp_grasps.daos.TypeReservationDao;
-
 import java.time.LocalDateTime;
 
 import static fr.diginamic.tp_grasps.utils.DateUtils.toDate;
 
 public class ReservationFactory {
-
-    private static final ClientDao clientDao = new ClientDao();
-
-    private static final TypeReservationDao typeReservationDao = new TypeReservationDao();
 
     public ReservationFactory() {
     }
@@ -35,14 +28,7 @@ public class ReservationFactory {
         // 7) Calcul du montant total de la réservation qui dépend:
         //    - du nombre de places
         //    - de la réduction qui s'applique si le client est premium ou non
-//        reservation.setTotal(calculerMontantTotal(client));
-        double total = type.getMontant() * nbPlaces;
-        if (client.isPremium()) {
-            reservation.setTotal(total*(1-type.getReductionPourcent()/100.0));
-        }
-        else {
-            reservation.setTotal(total);
-        }
+        reservation.setTotal(client.calculerReduction(type.getMontant() * nbPlaces, 1-type.getReductionPourcent()/100.0));
         return reservation;
     }
 }
