@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ProduitBuilder {
-    private String nom;
+    private final String nom;
     private String grade;
     private Categorie categorie;
     private Marque marque;
@@ -12,9 +12,8 @@ public class ProduitBuilder {
     private final Set<Allergene> allergenes = new HashSet<>();
     private final Set<Additif> additifs = new HashSet<>();
 
-    public ProduitBuilder addNom(String nom) {
+    public ProduitBuilder(String nom) {
         this.nom = nom;
-        return this;
     }
 
     public ProduitBuilder addGrade(String grade) {

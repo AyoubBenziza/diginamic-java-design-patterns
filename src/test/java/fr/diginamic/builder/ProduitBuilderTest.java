@@ -11,9 +11,8 @@ public class ProduitBuilderTest {
 
     @Test
     public void test() {
-        ProduitBuilder produitBuilder = new ProduitBuilder();
-        Produit produit = produitBuilder.
-                addNom("nom")
+        ProduitBuilder produitBuilder = new ProduitBuilder("produit");
+        Produit produit = produitBuilder
                 .addAdditif("additif", 1.0)
                 .addCategorie("categorie")
                 .addGrade("grade")
@@ -21,7 +20,7 @@ public class ProduitBuilderTest {
                 .addMarque("marque")
                 .build();
 
-        Assert.assertEquals("nom", produit.getNom());
+        Assert.assertEquals("produit", produit.getNom());
         Assert.assertEquals("categorie", produit.getCategorie().getNom());
         Assert.assertEquals("grade", produit.getGrade());
         Assert.assertEquals("marque", produit.getMarque().getNom());
