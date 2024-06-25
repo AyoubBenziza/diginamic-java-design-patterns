@@ -5,7 +5,7 @@ import org.junit.Test;
 public class SingletonTest {
 
     @Test
-    public void testGetValue() {
+    public void testGetProperty() {
         Configuration instance = Configuration.getInstance();
         assert(instance.getProperty("theme").equals("dark"));
         assert(instance.getProperty("title").equals("Design Patterns"));
