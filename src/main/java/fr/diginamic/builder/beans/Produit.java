@@ -1,6 +1,7 @@
 package fr.diginamic.builder.beans;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,19 +24,19 @@ public class Produit {
     @JoinTable(name = "produit_ingredient",
             joinColumns = @JoinColumn(name = "produit_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "produit_allergene",
             joinColumns = @JoinColumn(name = "produit_id"),
             inverseJoinColumns = @JoinColumn(name = "allergene_id"))
-    private Set<Allergene> allergenes;
+    private Set<Allergene> allergenes = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "produit_additif",
             joinColumns = @JoinColumn(name = "produit_id"),
             inverseJoinColumns = @JoinColumn(name = "additif_id"))
-    private Set<Additif> additifs;
+    private Set<Additif> additifs = new HashSet<>();
 
     public Produit() {
     }
@@ -112,5 +113,17 @@ public class Produit {
 
     public void setAdditifs(Set<Additif> additifs) {
         this.additifs = additifs;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void addAllergene(Allergene allergene) {
+        this.allergenes.add(allergene);
+    }
+
+    public void addAdditif(Additif additif) {
+        this.additifs.add(additif);
     }
 }

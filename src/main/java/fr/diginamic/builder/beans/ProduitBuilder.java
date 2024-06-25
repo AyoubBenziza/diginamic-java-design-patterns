@@ -1,52 +1,43 @@
 package fr.diginamic.builder.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class ProduitBuilder {
-    private final String nom;
-    private String grade;
-    private Categorie categorie;
-    private Marque marque;
-    private final Set<Ingredient> ingredients = new HashSet<>();
-    private final Set<Allergene> allergenes = new HashSet<>();
-    private final Set<Additif> additifs = new HashSet<>();
+    private final Produit produit = new Produit();
 
     public ProduitBuilder(String nom) {
-        this.nom = nom;
+        produit.setNom(nom);
     }
 
     public ProduitBuilder addGrade(String grade) {
-        this.grade = grade;
+        produit.setGrade(grade);
         return this;
     }
 
     public ProduitBuilder addCategorie(String categorie) {
-        this.categorie = new Categorie(categorie);
+        produit.setCategorie(new Categorie(categorie));
         return this;
     }
 
     public ProduitBuilder addMarque(String marque) {
-        this.marque = new Marque(marque);
+        produit.setMarque(new Marque(marque));
         return this;
     }
 
     public ProduitBuilder addIngredient(String nom, double qteMilligrammes) {
-        this.ingredients.add(new Ingredient(nom, qteMilligrammes));
+        produit.addIngredient(new Ingredient(nom, qteMilligrammes));
         return this;
     }
 
     public ProduitBuilder addAllergene(String allergene, double qteMilligrammes) {
-        this.allergenes.add(new Allergene(allergene,qteMilligrammes));
+        produit.addAllergene(new Allergene(allergene, qteMilligrammes));
         return this;
     }
 
     public ProduitBuilder addAdditif(String additif, double qteMilligrammes) {
-        this.additifs.add(new Additif(additif, qteMilligrammes));
+        produit.addAdditif(new Additif(additif, qteMilligrammes));
         return this;
     }
 
     public Produit build() {
-        return new Produit(nom, grade, categorie, marque, ingredients, allergenes, additifs);
+        return produit;
     }
 }
