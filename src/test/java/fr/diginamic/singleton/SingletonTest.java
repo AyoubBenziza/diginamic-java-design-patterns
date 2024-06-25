@@ -30,6 +30,6 @@ public class SingletonTest {
     @Test
     public void testGetProperties() {
         Configuration instance = Configuration.getInstance();
-        assert(instance.getProperties().size() == 5);
+        assertEquals(5, instance.getProperties().size());
     }
 }
